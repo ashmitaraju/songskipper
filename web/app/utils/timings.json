@@ -1,0 +1,18 @@
+{
+    "badtameez": [
+        {
+            "start": 0,
+            "stop": 5
+        },
+        {
+            "start": 6,
+            "stop": 10
+        }
+    ],
+    "kenny": [
+        {
+            "start": 5,
+            "stop": 15
+        }
+    ]
+}

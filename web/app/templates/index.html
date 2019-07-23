@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>SongSkipper</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css"> 
+    </head>
+
+    <body>
+        <video id="video" controls src="/static/kenny.mp4"> </video>
+        <div id="button" style="display: none;">Skip Song</div>
+    </body>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+
+    <script src="/static/js/script.js"></script>
+    <script>
+        timings = JSON.parse(
+            {{timings | tojson | safe }}
+        );
+    </script>
+</html>
