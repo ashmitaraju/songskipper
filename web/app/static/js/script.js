@@ -55,7 +55,7 @@ function updateUI() {
 
 function showButton() {
     $("#button").fadeIn();
-    setInterval(hideButton, 3000);
+    setInterval(hideButton, 8500);
 }
 
 function hideButton() {

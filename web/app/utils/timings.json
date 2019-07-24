@@ -1,18 +1,1 @@
-{
-    "badtameez": [
-        {
-            "start": 0,
-            "stop": 5
-        },
-        {
-            "start": 6,
-            "stop": 10
-        }
-    ],
-    "kenny": [
-        {
-            "start": 5,
-            "stop": 15
-        }
-    ]
-}
+{"badtameez": [{"start": 0, "stop": 5}, {"start": 6, "stop": 10}], "kenny": [{"start": 5, "stop": 15}], "yeh_jawaani_audio_full_moviepy.wav": [{"start": 220, "stop": 470.0}], "badtameez_dil.wav": [{"start": 20, "stop": 150}]}

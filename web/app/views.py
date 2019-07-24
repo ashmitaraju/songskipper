@@ -7,8 +7,5 @@ import json
 def index():
 
     data = read_data()
-    current = data['kenny']
-
-    print(current)
-
+    current = data['yeh_jawaani_audio_full_moviepy.wav']
     return render_template('index.html', timings=json.dumps(current))

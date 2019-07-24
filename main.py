@@ -7,6 +7,7 @@ import librosa
 import numpy as np 
 import pickle
 import moviepy
+import json
 
 def convert_to_wav(filename):
     
@@ -42,6 +43,11 @@ def predict(features):
 if __name__== "__main__": 
     filename = sys.argv[1]
 
+    sliding_window_size = 6
+    with open('web\\app\\utils\\timings.json','r') as f:
+        timings = json.load(f)
+    
+    timings[filename] = []
 
     # filename = "song_half_Badtameez_Dil_mono.wav"
 
@@ -55,11 +61,47 @@ if __name__== "__main__":
     print(prediction_probs) 
     print(predictions)
 
-    # sliding window algo
-    # write the values in the JSON 
-    # store this as metadata of the videos - as a JSON file 
-    # flask will just read the metadata of the videos and configure skip song accordingly 
+    df = pd.DataFrame(predictions) 
+    df['col1'] = prediction_probs
 
+    predictions = predictions.tolist()
+    first_occurence = predictions.index(1)
+    if first_occurence >= 5:
+        starting_index = first_occurence - 5
+    song_start = 0
+    stop_time = len(predictions) * 10
+
+    for i in range(starting_index,len(predictions)):
+        
+        if song_start == 0 and sum(predictions[i:i+ int(sliding_window_size)]) >= sliding_window_size/2:
+            start_time = i*10
+            i = first_occurence
+            song_start = 1
+        
+        if song_start == 1 and sum(predictions[i:i + int(sliding_window_size/2)]) == 0:
+            stop_time = (i + sliding_window_size/2 - 1 )*10
+            timing = {'start': start_time,'stop':stop_time}
+            timings[filename].append(timing)
+            start_time = 0
+            stop_time = len(predictions) * 10
+            song_start = 0
+    
+    if song_start == 1:
+        timing = {'start': start_time,'stop':stop_time}
+        timings[filename].append(timing)
+
+    with open('web/app/utils/timings.json','w') as f:
+        json.dump(timings,f)
+
+
+
+
+
+
+   # df.to_csv("predictions_2.csv")
+    # sliding window algo
+
+    # write the values in the JSON 
 
 
 
